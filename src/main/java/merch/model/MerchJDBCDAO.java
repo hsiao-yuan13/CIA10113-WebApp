@@ -1,6 +1,12 @@
 package merch.model;
 
 import java.util.*;
+
+import javax.servlet.http.Part;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.FileInputStream;
 import java.sql.*;
 
 public class MerchJDBCDAO implements MerchDAO_interface {
@@ -86,6 +92,7 @@ public class MerchJDBCDAO implements MerchDAO_interface {
 			pstmt.setString(3, merchVO.getMerchInfo());
 			pstmt.setInt(4, merchVO.getMerchPrice());
 			pstmt.setString(5, merchVO.getMerchStatus());
+			pstmt.setInt(6, merchVO.getMerchID());
 			
 			pstmt.executeUpdate();
 
@@ -317,6 +324,19 @@ public class MerchJDBCDAO implements MerchDAO_interface {
 		}
 		return list;
 	}
+	
+	//圖片
+
+	public static byte[] getByteArrayFromPart(Part part) throws IOException {
+        InputStream is = part.getInputStream();
+        byte[] imageData = new byte[is.available()];
+        is.read(imageData);
+        is.close();
+        return imageData;
+    }
+
+	
+	
 
 	public static void main(String[] args) {
 

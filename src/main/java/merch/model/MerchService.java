@@ -2,6 +2,8 @@ package merch.model;
 
 import java.util.List;
 
+import merch.model.MerchVO;
+
 public class MerchService {
 	private MerchDAO_interface dao;
 
@@ -25,11 +27,12 @@ public class MerchService {
 		return merchVO;
 	}
 	//修改
-	public MerchVO updateMerch(String merchName, byte[] merchImg, String merchInfo,
+	public MerchVO updateMerch(Integer merchID, String merchName, byte[] merchImg, String merchInfo,
 			Integer merchPrice, String merchStatus) {
 
 		MerchVO merchVO = new MerchVO();
 
+		merchVO.setMerchID(merchID);
 		merchVO.setMerchName(merchName);
 		merchVO.setMerchImg(merchImg);
 		merchVO.setMerchInfo(merchInfo);
@@ -41,13 +44,17 @@ public class MerchService {
 	}
 
 
-	//查詢編號
+	//查詢商品編號
 	public MerchVO findByPrimaryKey(Integer merchID) {
 		return dao.findByPrimaryKey(merchID);
 	}
-	//查詢名稱
+	//查詢商品名稱
 	public MerchVO findByName(String merchName) {
 		return dao.findByName(merchName);
+	}
+	//修改單一商品
+	public MerchVO getOneMerch(Integer merchID) {
+		return dao.findByPrimaryKey(merchID);
 	}
 	//查詢全部
 	public List<MerchVO> getAll() {
